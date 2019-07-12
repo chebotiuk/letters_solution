@@ -14,9 +14,8 @@ function dropElement(array, el) {
 function parseInputData(src) {
   let data = fs.readFileSync(src, { encoding: 'utf-8' })
   data = data.split('\n')
-  const symbolAmount = data.shift()
 
-  return [symbolAmount, data]
+  return data
 }
 
 function matchWord (wordLetters, letters){
@@ -38,11 +37,8 @@ function matchWord (wordLetters, letters){
 }
 
 function processInputs(wordsInputSrc, lettersInputSrc, outputFileSrc) {
-  const [wordsInfo, words] = parseInputData(wordsInputSrc)
-  let [lettersAmount, letters] = parseInputData(lettersInputSrc)
-
-  // console.log(wordsInfo, words)
-  // console.log(lettersAmount, letters)
+  const words = parseInputData(wordsInputSrc)
+  let letters = parseInputData(lettersInputSrc)
 
   const wordsOutput = []
 
@@ -58,7 +54,7 @@ function processInputs(wordsInputSrc, lettersInputSrc, outputFileSrc) {
     }
   })
 
-  const result = wordsOutput.length + '\n' + wordsOutput.join('\n')
+  const result = wordsOutput.join('\n')
   fs.writeFileSync(outputFileSrc, result)
 }
 
